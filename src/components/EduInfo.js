@@ -10,6 +10,7 @@ class EduInfo extends Component {
       major: '',
       startDate: '',
       endDate: '',
+      edit: true,
     };
   }
 
@@ -29,9 +30,18 @@ class EduInfo extends Component {
     this.setState({ endDate });
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setState({ edit: false });
+  }
+
+  handleEdit = () => {
+    this.setState({ edit: true });
+  }
+
   renderEdit = () => {
     return (
-      <div>
+      <form onSubmit={this.handleSubmit}>
         <Input 
           type='text' 
           label='School Name: ' 
@@ -56,7 +66,8 @@ class EduInfo extends Component {
           handleChange={this.handleEndDateChange}
           value={this.state.endDate}
         />
-      </div>
+        <button type='submit'>Submit</button>
+      </form>
     )
   }
 
@@ -75,11 +86,12 @@ class EduInfo extends Component {
         <div>
           <p>End Date: {this.state.endDate}</p>
         </div>
+        <button type='button' onClick={this.handleEdit}>Edit</button>
       </div>
     )
   }
   render() {
-    if (this.props.edit) {
+    if (this.state.edit) {
       return this.renderEdit();
     } 
     return this.renderNonEdit();

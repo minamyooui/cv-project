@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import Input from './Input';
 
 class WorkForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       company: '',
@@ -35,13 +35,13 @@ class WorkForm extends Component {
     this.setState({ endDate });
   }
 
-  handleEditClick = () => {
-    this.setState({edit: true});
-  }
-
   handleSubmit = (e) => {
     e.preventDefault();
     this.setState({ edit: false });
+  }
+
+  handleEdit = () => {
+    this.setState({ edit: true });
   }
 
   renderEdit = () => {
@@ -102,7 +102,7 @@ class WorkForm extends Component {
         <div>
           <p>End Date: {this.state.endDate}</p>
         </div>
-        <button type='button' onClick={this.handleEditClick}>Edit</button>
+        <button type='button' onClick={this.handleEdit}>Edit</button>
       </div>
     )
   }

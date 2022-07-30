@@ -9,6 +9,7 @@ class GenInfo extends Component {
       name: '',
       email: '',
       phone: '',
+      edit: true,
     };
   }
 
@@ -24,9 +25,18 @@ class GenInfo extends Component {
     this.setState({ phone });
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setState({ edit: false });
+  }
+
+  handleEdit = () => {
+    this.setState({ edit: true });
+  }
+
   renderEdit() {
     return (
-      <div>
+      <form onSubmit={this.handleSubmit}>
         <Input 
           type='text' 
           label='Name: ' 
@@ -45,7 +55,8 @@ class GenInfo extends Component {
           value={this.state.phone}
           handleChange={this.handlePhoneChange}  
         />
-      </div>
+        <button type='submit'>Submit</button>
+      </form>
     )
   }
 
@@ -61,11 +72,12 @@ class GenInfo extends Component {
         <div>
           <p>Phone Number: {this.state.phone}</p>
         </div>
+        <button type='button' onClick={this.handleEdit}>Edit</button>
       </div>
     )
   }
   render() {
-    if (this.props.edit) {
+    if (this.state.edit) {
       return this.renderEdit();
     }
     return this.renderNonEdit();
