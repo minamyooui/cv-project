@@ -7,12 +7,12 @@
   display: grid;
   justify-content: center;
   gap: 20px;
-  padding: 80px;
+  padding: 50px;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 .section {
   border: 5px solid gray;
