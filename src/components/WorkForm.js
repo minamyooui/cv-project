@@ -46,7 +46,7 @@ class WorkForm extends Component {
 
   renderEdit = () => {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className='work info'>
         <Input 
           type='text' 
           label='Company Name: ' 
@@ -85,7 +85,7 @@ class WorkForm extends Component {
 
   renderNonEdit = () => {
     return (
-      <div>
+      <div className='work info'>
         <div>
           <p>Company Name: {this.state.company}</p>
         </div>

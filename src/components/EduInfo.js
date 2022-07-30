@@ -41,7 +41,7 @@ class EduInfo extends Component {
 
   renderEdit = () => {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className='info'>
         <Input 
           type='text' 
           label='School Name: ' 
@@ -73,7 +73,7 @@ class EduInfo extends Component {
 
   renderNonEdit = () => {
     return (
-      <div>
+      <div className='info'>
         <div>
           <p>School Name: {this.state.name}</p>
         </div>

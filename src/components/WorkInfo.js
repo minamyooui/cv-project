@@ -4,7 +4,7 @@ import WorkForm from './WorkForm';
 class WorkInfo extends Component {
   render() {
     return (
-      <div>
+      <div id='work-div'>
         <WorkForm />
         <WorkForm />
         <WorkForm />
