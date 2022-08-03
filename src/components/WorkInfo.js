@@ -1,16 +1,14 @@
-import React, {Component} from 'react';
+import React from 'react';
 import WorkForm from './WorkForm';
 
-class WorkInfo extends Component {
-  render() {
-    return (
-      <div id='work-div'>
-        <WorkForm />
-        <WorkForm />
-        <WorkForm />
-      </div>
-    )
-  }
+function WorkInfo (){
+  return (
+    <div id='work-div'>
+      <WorkForm />
+      <WorkForm />
+      <WorkForm />
+    </div>
+  )
 }
 
 export default WorkInfo;

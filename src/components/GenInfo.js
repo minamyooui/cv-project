@@ -1,87 +1,84 @@
-import React, {Component} from 'react';
+import React, { useState } from 'react';
 import Input from './Input';
 
-class GenInfo extends Component {
-  constructor() {
-    super();
+function GenInfo () {
 
-    this.state = {
+  const [state, setState] = 
+    useState({
       name: '',
       email: '',
       phone: '',
       edit: true,
-    };
+    });
+
+  const handleNameChange = (name) => {
+    setState({ ...state, name });
   }
 
-  handleNameChange = (name) => {
-    this.setState({ name });
+  const handleEmailChange = (email) => {
+    setState({ ...state, email });
   }
 
-  handleEmailChange = (email) => {
-    this.setState({ email });
+  const handlePhoneChange = (phone) => {
+    setState({ ...state, phone });
   }
 
-  handlePhoneChange = (phone) => {
-    this.setState({ phone });
-  }
-
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({ edit: false });
+    setState({ ...state, edit: false});
   }
 
-  handleEdit = () => {
-    this.setState({ edit: true });
+  const handleEdit = () => {
+    setState({ ...state, edit: true});
   }
 
-  renderEdit() {
+  function renderEdit() {
     return (
-      <form onSubmit={this.handleSubmit} className='info'>
+      <form onSubmit={handleSubmit} className='info'>
         <Input 
           type='text' 
           label='Name: ' 
-          value={this.state.name}
-          handleChange={this.handleNameChange}  
+          value={state.name}
+          handleChange={handleNameChange}  
         />
         <Input 
           type='email' 
           label='Email: ' 
-          value={this.state.email}
-          handleChange={this.handleEmailChange}  
+          value={state.email}
+          handleChange={handleEmailChange}  
         />
         <Input 
           type='tel' 
           label='Phone Number: ' 
-          value={this.state.phone}
-          handleChange={this.handlePhoneChange}  
+          value={state.phone}
+          handleChange={handlePhoneChange}  
         />
         <button type='submit'>Submit</button>
       </form>
     )
   }
 
-  renderNonEdit() {
+  function renderNonEdit() {
     return (
       <div className='info'>
         <div>
-          <p>Name: {this.state.name}</p>
+          <p>Name: {state.name}</p>
         </div>
         <div>
-          <p>Email: {this.state.email}</p>
+          <p>Email: {state.email}</p>
         </div>
         <div>
-          <p>Phone Number: {this.state.phone}</p>
+          <p>Phone Number: {state.phone}</p>
         </div>
-        <button type='button' onClick={this.handleEdit}>Edit</button>
+        <button type='button' onClick={handleEdit}>Edit</button>
       </div>
     )
   }
-  render() {
-    if (this.state.edit) {
-      return this.renderEdit();
-    }
-    return this.renderNonEdit();
+  
+  if (state.edit) {
+    return renderEdit();
   }
+  return renderNonEdit();
   
 }
 

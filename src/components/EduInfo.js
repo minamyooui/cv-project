@@ -1,102 +1,99 @@
-import React, {Component} from 'react';
+import React, { useState } from 'react';
 import Input from './Input';
 
-class EduInfo extends Component {
-  constructor(props) {
-    super(props);
+function EduInfo () {
 
-    this.state = {
+  const [state, setState] = 
+    useState({
       name: '',
       major: '',
       startDate: '',
       endDate: '',
       edit: true,
-    };
+    });
+
+  const handleNameChange = (name) => {
+    setState({...state, name});
   }
 
-  handleNameChange = (name) => {
-    this.setState({name});
+  const handleMajorChange = (major) => {
+    setState({...state, major});
   }
 
-  handleMajorChange = (major) => {
-    this.setState({major});
+  const handleStartDateChange = (startDate) => {
+    setState({ ...state, startDate });
   }
 
-  handleStartDateChange = (startDate) => {
-    this.setState({ startDate });
+  const handleEndDateChange = (endDate) => {
+    setState({ ...state, endDate });
   }
 
-  handleEndDateChange = (endDate) => {
-    this.setState({ endDate });
-  }
-
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({ edit: false });
+    setState({ ...state, edit: false });
   }
 
-  handleEdit = () => {
-    this.setState({ edit: true });
+  const handleEdit = () => {
+    setState({ ...state, edit: true });
   }
 
-  renderEdit = () => {
+  const renderEdit = () => {
     return (
-      <form onSubmit={this.handleSubmit} className='info'>
+      <form onSubmit={handleSubmit} className='info'>
         <Input 
           type='text' 
           label='School Name: ' 
-          handleChange={this.handleNameChange}
-          value={this.state.name}
+          handleChange={handleNameChange}
+          value={state.name}
         />
         <Input 
           type='text' 
           label='Major: ' 
-          handleChange={this.handleMajorChange}
-          value={this.state.major}
+          handleChange={handleMajorChange}
+          value={state.major}
         />
         <Input 
           type='date' 
           label='Start Date: '
-          handleChange={this.handleStartDateChange}
-          value={this.state.startDate} 
+          handleChange={handleStartDateChange}
+          value={state.startDate} 
         />
         <Input 
           type='date' 
           label='End Date: ' 
-          handleChange={this.handleEndDateChange}
-          value={this.state.endDate}
+          handleChange={handleEndDateChange}
+          value={state.endDate}
         />
         <button type='submit'>Submit</button>
       </form>
     )
   }
 
-  renderNonEdit = () => {
+  const renderNonEdit = () => {
     return (
       <div className='info'>
         <div>
-          <p>School Name: {this.state.name}</p>
+          <p>School Name: {state.name}</p>
         </div>
         <div>
-          <p>Major: {this.state.major}</p>
+          <p>Major: {state.major}</p>
         </div>
         <div>
-          <p>Start Date: {this.state.startDate}</p>
+          <p>Start Date: {state.startDate}</p>
         </div>
         <div>
-          <p>End Date: {this.state.endDate}</p>
+          <p>End Date: {state.endDate}</p>
         </div>
-        <button type='button' onClick={this.handleEdit}>Edit</button>
+        <button type='button' onClick={handleEdit}>Edit</button>
       </div>
     )
   }
-  render() {
-    if (this.state.edit) {
-      return this.renderEdit();
-    } 
-    return this.renderNonEdit();
-  }
   
+  if (state.edit) {
+    return renderEdit();
+  } 
+  return renderNonEdit();
+
 }
 
 export default EduInfo;

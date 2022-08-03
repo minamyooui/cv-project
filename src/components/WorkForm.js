@@ -1,119 +1,114 @@
-import React, {Component} from 'react';
+import React, { useState } from 'react';
 import Input from './Input';
 
-class WorkForm extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
+function WorkForm () {
+  
+  const [state, setState] = 
+    useState({
       company: '',
       position: '',
       text: '',
       startDate: '',
       endDate: '',
       edit: true,
-    }
+    });
+
+  const handleCompanyChange = (company) => {
+    setState({...state, company});
   }
 
-  handleCompanyChange = (company) => {
-    this.setState({company});
+  const handlePositionChange = (position) => {
+    setState({...state, position});
   }
 
-  handlePositionChange = (position) => {
-    this.setState({position});
+  const handleTextChange = (e) => {
+    setState({...state, text: e.target.value });
   }
 
-  handleTextChange = (e) => {
-    this.setState({ text: e.target.value });
+  const handleStartDateChange = (startDate) => {
+    setState({...state, startDate });
   }
 
-  handleStartDateChange = (startDate) => {
-    this.setState({ startDate });
+  const handleEndDateChange = (endDate) => {
+    setState({...state, endDate });
   }
 
-  handleEndDateChange = (endDate) => {
-    this.setState({ endDate });
-  }
-
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({ edit: false });
+    setState({...state, edit: false });
   }
 
-  handleEdit = () => {
-    this.setState({ edit: true });
+  const handleEdit = () => {
+    setState({...state, edit: true });
   }
 
-  renderEdit = () => {
+  const renderEdit = () => {
     return (
-      <form onSubmit={this.handleSubmit} className='work info'>
+      <form onSubmit={handleSubmit} className='work info'>
         <Input 
           type='text' 
           label='Company Name: ' 
-          handleChange={this.handleCompanyChange}
-          value={this.state.company}
+          handleChange={handleCompanyChange}
+          value={state.company}
         />
         <Input 
           type='text' 
           label='Position Title: ' 
-          handleChange={this.handlePositionChange}
-          value={this.state.position}
+          handleChange={handlePositionChange}
+          value={state.position}
         />
         <label>
           Responsibilities:
           <textarea 
-            onChange={this.handleTextChange}
-            value={this.state.text}
+            onChange={handleTextChange}
+            value={state.text}
           ></textarea>
         </label>
         <Input 
           type='date'
           label='Start Date: ' 
-          handleChange={this.handleStartDateChange}
-          value={this.state.startDate}
+          handleChange={handleStartDateChange}
+          value={state.startDate}
         />
         <Input 
           type='date' 
           label='End Date: ' 
-          handleChange={this.handleEndDateChange}
-          value={this.state.endDate}  
+          handleChange={handleEndDateChange}
+          value={state.endDate}  
         />
         <button type='submit'>Submit</button>
       </form>
     )
   }
 
-  renderNonEdit = () => {
+  const renderNonEdit = () => {
     return (
       <div className='work info'>
         <div>
-          <p>Company Name: {this.state.company}</p>
+          <p>Company Name: {state.company}</p>
         </div>
         <div>
-          <p>Position Title: {this.state.position}</p>
+          <p>Position Title: {state.position}</p>
         </div>
         <div>
           <p>Responsibilities: </p>
-          <p>{this.state.text}</p>
+          <p>{state.text}</p>
         </div>
         <div>
-          <p>Start Date: {this.state.startDate}</p>
+          <p>Start Date: {state.startDate}</p>
         </div>
         <div>
-          <p>End Date: {this.state.endDate}</p>
+          <p>End Date: {state.endDate}</p>
         </div>
-        <button type='button' onClick={this.handleEdit}>Edit</button>
+        <button type='button' onClick={handleEdit}>Edit</button>
       </div>
     )
   }
 
-  render() {
-    if (this.state.edit) {
-      return this.renderEdit();
-    }
-    return this.renderNonEdit();
+  if (state.edit) {
+    return renderEdit();
   }
-  
+  return renderNonEdit();
 }
 
 export default WorkForm;
